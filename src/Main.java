@@ -156,6 +156,7 @@ class  Main extends JFrame implements ActionListener{
 
     } ////end of the ImageBrightness class
 
+
     ////start the ImageResize class
     //The ImageResize class represents the interface that allows you to resize the image
     //by making changes to its width and height
