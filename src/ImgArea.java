@@ -26,6 +26,7 @@ class ImgArea extends Canvas{
     int mY;
     int x;
     int y;
+    int x1,x2,y1,y2;
     static boolean imageLoaded;
     boolean actionSlided;
     boolean actionResized;
@@ -173,11 +174,11 @@ class ImgArea extends Canvas{
 
     }
     //Rotate the image shown on the program interface
-    public void makeImageRotate(BufferedImage image,int w,int h){
+    public void makeImageRotate(BufferedImage image,int w,int h,double degree){
 
         BufferedImage bi=(BufferedImage)createImage(w,h);
         Graphics2D  g2d=(Graphics2D)bi.createGraphics();
-        radian=(float)Math.PI/2; //angle
+        radian=(float)Math.toRadians(degree) ;//angle
         g2d.translate(w/2,h/2); //move to coordinate (w/2,h/2)
         g2d.rotate(radian); //rotate the image
         g2d.translate(-h/2,-w/2); //move the coordinate back
@@ -188,7 +189,7 @@ class ImgArea extends Canvas{
 
     }
     //The rotateImage invokes the makeImageRotate method to rotate the image
-    public void rotateImage(){
+    public void rotateImage(double degree){
         BufferedImage bi;
         //rotate update image
         if(actionSlided || actionResized || actionTransparent || actionRotated || drawn){
@@ -199,7 +200,7 @@ class ImgArea extends Canvas{
             bi=orBufferedImage;
         }
 
-        makeImageRotate(bi,bi.getHeight(),bi.getWidth());
+        makeImageRotate(bi,bi.getHeight(),bi.getWidth(),degree);
 
         actionRotated=true; //set the actionRotated to true to indicate that
         //the image is rotated
