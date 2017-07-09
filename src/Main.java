@@ -86,7 +86,7 @@ class Main extends JFrame implements ActionListener {
 
         editmenu = new JMenu("Edit");
         editmenu.setMnemonic(KeyEvent.VK_E);
-        mbright = new JMenuItem("Image brightness");
+        mbright = new JMenuItem("Image color");
         mbright.setMnemonic(KeyEvent.VK_B);
         mbright.addActionListener(this);
         crop =new JMenuItem("crop (crop from top left to bottom right)");
@@ -147,11 +147,11 @@ class Main extends JFrame implements ActionListener {
 
         editmenu.add(maddtext);
         editmenu.add(mbright);
-        editmenu.add(mcompress);
+        //editmenu.add(mcompress);
         editmenu.add(mresize);
         editmenu.add(mrotateright);
         //editmenu.add(mrotateleft);
-        editmenu.add(mtransparent);
+        //aeditmenu.add(mtransparent);
         editmenu.add(crop);
         editmenu.add(mcancel);
 
@@ -185,28 +185,25 @@ class Main extends JFrame implements ActionListener {
         ia.requestFocus();
     }
 
-    ////start the ImageBrightness class
-    //The ImageBrightness class represents the interface to allow the user to make the image
-    //brighter or darker by changing the value of the image slider
-    //The ImageBrightness class is in the Main class
+
     public class ImageBrightness extends JFrame implements ChangeListener {
         JSlider slider;
 
-        ImageBrightness() {
-            addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e) {
+        ImageBrightness(){
+            addWindowListener(new WindowAdapter(){
+                public void windowClosing(WindowEvent e){
                     dispose();
 
                 }
             });
-            Container cont = getContentPane();
-            slider = new JSlider(-10, 10, 0);
+            Container cont=getContentPane();
+            slider=new JSlider(-10,10,0);
             slider.setEnabled(false);
             slider.addChangeListener(this);
-            cont.add(slider, BorderLayout.CENTER);
+            cont.add(slider,BorderLayout.CENTER);
             slider.setEnabled(true);
-            setTitle("Image brightness");
-            setPreferredSize(new Dimension(300, 100));
+            setTitle("Image color");
+            setPreferredSize(new Dimension(300,100));
             setVisible(true);
             pack();
             enableSlider(false);
@@ -225,7 +222,7 @@ class Main extends JFrame implements ActionListener {
 
         }
 
-    } ////end of the ImageBrightness class
+    }
 
 
     public class ColorChanger extends JFrame implements ChangeListener {
@@ -244,7 +241,7 @@ class Main extends JFrame implements ActionListener {
             slider1.addChangeListener(this);
             cont.add(slider1, BorderLayout.CENTER);
             slider1.setEnabled(true);
-            setTitle("Image brightness");
+            setTitle("Image color");
             setPreferredSize(new Dimension(300, 100));
             setVisible(true);
             pack();
@@ -267,10 +264,7 @@ class Main extends JFrame implements ActionListener {
     }
 
 
-    ////start the ImageResize class
-    //The ImageResize class represents the interface that allows you to resize the image
-    //by making changes to its width and height
-    //The ImageResize class is in the Main class
+
     public class ImageResize extends JFrame implements ActionListener {
         JPanel panel;
         JTextField txtWidth;
@@ -279,7 +273,7 @@ class Main extends JFrame implements ActionListener {
 
         ImageResize() {
             setTitle("Image resize");
-            //setDefaultCloseOperation(EXIT_ON_CLOSE);
+
             setPreferredSize(new Dimension(400, 100));
 
             btOK = new JButton("OK");
@@ -306,7 +300,7 @@ class Main extends JFrame implements ActionListener {
             enableComponents(false);
         }
 
-        //This method can be invoked to  enable the text boxes of image width and height
+
         public void enableComponents(boolean enabled) {
             txtWidth.setEnabled(enabled);
             txtHeight.setEnabled(enabled);
@@ -323,27 +317,26 @@ class Main extends JFrame implements ActionListener {
             }
         }
 
-        //Restrict the key presses
-        //Only number, backspace, and delete keys are allowed
+
         public class KeyList extends KeyAdapter {
             public void keyTyped(KeyEvent ke) {
 
                 char c = ke.getKeyChar();
                 int intkey = (int) c;
                 if (!(intkey >= 48 && intkey <= 57 || intkey == 8 || intkey == 127)) {
-                    ke.consume(); //hide the unwanted key
+                    ke.consume();
 
                 }
 
             }
 
         }
-    }////end of the ImageResize class
+    }
 
     public class ImageRotate extends JFrame implements ActionListener {
         JPanel panel;
         JTextField rotationDegree;
-        //JTextField txtHeight;
+
         Double degree;
 
         JButton btOK;
@@ -351,7 +344,7 @@ class Main extends JFrame implements ActionListener {
         ImageRotate() {
             super();
             setTitle("Image resize");
-            //setDefaultCloseOperation(EXIT_ON_CLOSE);
+
             setPreferredSize(new Dimension(400, 100));
 
             btOK = new JButton("rotate");
@@ -377,14 +370,12 @@ class Main extends JFrame implements ActionListener {
             enableComponents(false);
         }
 
-        //This method can be invoked to  enable the text boxes of image width and height
         public void enableComponents(boolean enabled) {
             rotationDegree.setEnabled(enabled);
 
             btOK.setEnabled(enabled);
         }
 
-        //This method works when you click the OK button to resize the image
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == btOK) {
                 ia.setActionResized(true);
@@ -396,8 +387,6 @@ class Main extends JFrame implements ActionListener {
 
         }
 
-        //Restrict the key presses
-        //Only number, backspace, and delete keys are allowed
         public class KeyList extends KeyAdapter {
             public void keyTyped(KeyEvent ke) {
 
@@ -413,10 +402,6 @@ class Main extends JFrame implements ActionListener {
         }
     }
 
-    ////start the TextAdd class
-    //The TextAdd class represents the interface that allows you to add your text to the image
-    //In this interface you can input your text, select color, font name, and font size of the text
-    //The TextAdd class is in the Main class
     public class TextAdd extends JFrame implements ActionListener {
         JPanel panel;
         JTextArea txtText;
@@ -431,7 +416,6 @@ class Main extends JFrame implements ActionListener {
         TextAdd() {
             colorText = null;
             setTitle("Add text to the image");
-            //setDefaultCloseOperation(EXIT_ON_CLOSE);
             setPreferredSize(new Dimension(400, 150));
 
             btOK = new JButton("OK");
@@ -466,7 +450,7 @@ class Main extends JFrame implements ActionListener {
 
 
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == btOK) { //the button OK is clicked so the text is ready to place on the image
+            if (e.getSource() == btOK) {
                 ia.setActionDraw(true);
                 String textDraw = txtText.getText();
                 String fontName = cbFontNames.getSelectedItem().toString();
@@ -480,21 +464,17 @@ class Main extends JFrame implements ActionListener {
             }
         }
 
-        //The listFonts method get all available fonts from the system
         public void listFonts() {
-            //get the available font names and add them to the font names combobox
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             String[] fonts = ge.getAvailableFontFamilyNames();
             for (String f : fonts)
                 cbFontNames.addItem(f);
-            //Initialize font sizes
             for (int i = 8; i < 50; i++)
                 cbFontSizes.addItem(i);
 
         }
-    } ////end of the TextAdd class
+    }
 
-    //handling events of sub-menu items on the main program interface
     public void actionPerformed(ActionEvent e) {
 
         JMenuItem source = (JMenuItem) (e.getSource());
@@ -588,7 +568,6 @@ class Main extends JFrame implements ActionListener {
 
 
 
-        //ia.orBufferedImage=ia.orBufferedImage.getSubimage(ia.x1-ia.x,ia.y1-ia.y,ia.x1-ia.x2,ia.y1-ia.y2);
 
 
             ia.repaint();
@@ -629,7 +608,7 @@ class Main extends JFrame implements ActionListener {
             ia.repaint();
         } else if (source.getText().compareTo("Add text on image") == 0) {
             new TextAdd();
-        } else if (source.getText().compareTo("Image brightness") == 0) {
+        } else if (source.getText().compareTo("Image color") == 0) {
 
             ImageBrightness ib = new ImageBrightness();
             if (ImgArea.imageLoaded)
@@ -661,7 +640,6 @@ class Main extends JFrame implements ActionListener {
         } else if (source.getText().compareTo("Image transparency") == 0) {
             if (ImgArea.c == null) {
                 JOptionPane dialog = new JOptionPane();
-                //dialog.showMessageDialog(this, "Click the background area of the image first", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (ImgArea.imageLoaded) {
                 ia.makeTransparency(ImgArea.c);
                 enableSaving(true);
@@ -675,8 +653,6 @@ class Main extends JFrame implements ActionListener {
         repaint();
     }
 
-    //The setImage method has code to open the file dialog so the user can choose
-    //the file to show on the program interface
     public void setImage() {
 
         int returnVal = chooser.showOpenDialog(this);
@@ -687,8 +663,6 @@ class Main extends JFrame implements ActionListener {
 
     }
 
-    //The showSaveFileDialog method has code to display the save file dialog
-    //It is invoked when the user select Save as... sub-menu item
     public void showSaveFileDialog() {
         int returnVal = chooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -699,7 +673,6 @@ class Main extends JFrame implements ActionListener {
     }
 
 
-    //The enableSaving method defines code to enable or  disable saving sub-menu items
     public void enableSaving(boolean f) {
         msaveas.setEnabled(f);
         msave.setEnabled(f);
