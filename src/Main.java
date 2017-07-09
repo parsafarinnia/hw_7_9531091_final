@@ -7,7 +7,7 @@ import com.jhlabs.image.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.GrayFilter;
+
 import javax.swing.event.*;
 
 import javax.swing.filechooser.*;
