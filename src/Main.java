@@ -56,6 +56,7 @@ class Main extends JFrame implements ActionListener {
     JMenuItem stamp;
 
     Main() {
+        System.out.println("main");
         ia = new ImgArea();
         Container cont = getContentPane();
         cont.add(ia, BorderLayout.CENTER);
@@ -678,5 +679,6 @@ class Main extends JFrame implements ActionListener {
         msave.setEnabled(f);
 
     }
+
 
 }
